@@ -1,0 +1,99 @@
+{
+	"compiler": {
+		"version": "0.8.15+commit.e14f2714"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "books",
+				"outputs": [
+					{
+						"internalType": "contract Book",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_bookTitle",
+						"type": "string"
+					}
+				],
+				"name": "newBook",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_bookTitle",
+						"type": "string"
+					}
+				],
+				"name": "newBookEther",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/BookFactory.sol": "BookFactory"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/Book.sol": {
+			"keccak256": "0xca7a40f9613e35ca47ac60eb7029922f258cca97df19dbcb6b2d77adda0c54ad",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://4c186bb543bf7220fd15747b1173c431dd770f035faaaf127c0f3edc3620db88",
+				"dweb:/ipfs/QmVoeiWmt5WTWNfZEnTsnKLfnACY4YoApkFjFf4D76n5Wk"
+			]
+		},
+		"contracts/BookFactory.sol": {
+			"keccak256": "0x965eee196f196a305215900dc51d35e3468834f6bd134708c3acff445bd6ca6f",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://74670471ccf0e60434fcebdadc1e4578d8c190ebd6242a07a25e0eee01e37e97",
+				"dweb:/ipfs/QmYyDdDsBq5E1P3pdmb8vAbb4RdtLpHp5abvQJQohGoGbk"
+			]
+		}
+	},
+	"version": 1
+}

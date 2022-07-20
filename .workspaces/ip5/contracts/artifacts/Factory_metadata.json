@@ -1,0 +1,123 @@
+{
+	"compiler": {
+		"version": "0.8.15+commit.e14f2714"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "childAddress",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "data",
+						"type": "uint256"
+					}
+				],
+				"name": "ChildCreated",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "children",
+				"outputs": [
+					{
+						"internalType": "contract Child",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "data",
+						"type": "uint256"
+					}
+				],
+				"name": "createChild",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "contract Child",
+						"name": "child",
+						"type": "address"
+					}
+				],
+				"name": "disable",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getChildren",
+				"outputs": [
+					{
+						"internalType": "contract Child[]",
+						"name": "_children",
+						"type": "address[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/CounterFactory.sol": "Factory"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/CounterFactory.sol": {
+			"keccak256": "0xaf843dc90d82dca36b6650b43c1f4287f043969736863cac93cf37b09aa9387e",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://47e553b74c91d910a0777f3e976c42b9e77776a27fc228c006877a8ef5cc1498",
+				"dweb:/ipfs/QmcTbqkV4CaWnSyAMJ3YMfnRTJhovWFt3ytnWG8MxCgijP"
+			]
+		}
+	},
+	"version": 1
+}

@@ -1,0 +1,106 @@
+{
+	"compiler": {
+		"version": "0.8.15+commit.e14f2714"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_bookID",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "_bookTitle",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "_seller",
+						"type": "address"
+					}
+				],
+				"stateMutability": "payable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "bookID",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "bookTitle",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "seller",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/Book.sol": "Book"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/Book.sol": {
+			"keccak256": "0xca7a40f9613e35ca47ac60eb7029922f258cca97df19dbcb6b2d77adda0c54ad",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://4c186bb543bf7220fd15747b1173c431dd770f035faaaf127c0f3edc3620db88",
+				"dweb:/ipfs/QmVoeiWmt5WTWNfZEnTsnKLfnACY4YoApkFjFf4D76n5Wk"
+			]
+		}
+	},
+	"version": 1
+}
