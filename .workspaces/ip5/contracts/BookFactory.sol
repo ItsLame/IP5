@@ -11,20 +11,20 @@ contract BookFactory
     Book[] public books;
 
     // new book
-    function newBook(string memory _bookTitle) public
+    function newBook(string memory _bookTitle, string memory _bookAuthor, uint _bookPrice) public
     {
         // pointer to book contract
-        Book book = new Book(books.length, _bookTitle, msg.sender);
+        Book book = new Book(books.length, _bookTitle, _bookAuthor, payable(msg.sender), msg.sender, _bookPrice);
 
         // push book contract pointer to array
         books.push(book);
     }
 
     // new book with ether
-    function newBookEther(string memory _bookTitle) public payable
+    function newBookEther(string memory _bookTitle, string memory _bookAuthor, uint _bookPrice) public payable
     {
         // pointer to book contract
-        Book book = (new Book){value:msg.value}(books.length, _bookTitle, msg.sender);
+        Book book = (new Book){value:msg.value}(books.length, _bookTitle, _bookAuthor, payable(msg.sender), msg.sender, _bookPrice);
 
         // push book contract pointer to array
         books.push(book);
