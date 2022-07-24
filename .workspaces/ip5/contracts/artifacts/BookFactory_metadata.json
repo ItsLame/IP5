@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.15+commit.e14f2714"
+		"version": "0.8.7+commit.e28d00a7"
 	},
 	"language": "Solidity",
 	"output": {
@@ -30,6 +30,16 @@
 						"internalType": "string",
 						"name": "_bookTitle",
 						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_bookAuthor",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_bookPrice",
+						"type": "uint256"
 					}
 				],
 				"name": "newBook",
@@ -43,6 +53,16 @@
 						"internalType": "string",
 						"name": "_bookTitle",
 						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_bookAuthor",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_bookPrice",
+						"type": "uint256"
 					}
 				],
 				"name": "newBookEther",
@@ -79,19 +99,19 @@
 	},
 	"sources": {
 		"contracts/Book.sol": {
-			"keccak256": "0xca7a40f9613e35ca47ac60eb7029922f258cca97df19dbcb6b2d77adda0c54ad",
+			"keccak256": "0x76bb69ab2fe88cd9daec0fab97a356699a3655fac511bbf79f2815073b7a35be",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://4c186bb543bf7220fd15747b1173c431dd770f035faaaf127c0f3edc3620db88",
-				"dweb:/ipfs/QmVoeiWmt5WTWNfZEnTsnKLfnACY4YoApkFjFf4D76n5Wk"
+				"bzz-raw://11555007ecc51c6542d75ff2edea98a44748978eae78809cb19d7e647beeff1c",
+				"dweb:/ipfs/QmS8G19g49Nqaghg1gNsnETd9Ymchnmzr2LsXnxshkr9KX"
 			]
 		},
 		"contracts/BookFactory.sol": {
-			"keccak256": "0x965eee196f196a305215900dc51d35e3468834f6bd134708c3acff445bd6ca6f",
+			"keccak256": "0xfe5ea53c246352d42648cf51b3804ee7f225efe7bedfa8a6a0ec0f2c300b3a94",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://74670471ccf0e60434fcebdadc1e4578d8c190ebd6242a07a25e0eee01e37e97",
-				"dweb:/ipfs/QmYyDdDsBq5E1P3pdmb8vAbb4RdtLpHp5abvQJQohGoGbk"
+				"bzz-raw://3bc2a5d74ab4e359cecc3f7139abf0bb969d79dc950dbfa299f28b6caa0f02af",
+				"dweb:/ipfs/QmTkUqQw2QEg8iW838u59aGiucSJAUBV8CnwdPUTJ1v2ED"
 			]
 		}
 	},
