@@ -2,31 +2,45 @@
 
 pragma solidity >=0.7.0 <0.9.0;
 
+import "./BookFactory.sol";
 import "./oracle.sol";
-import "./BookFactory";
+
 
 contract UserApp is BookOracleClient {
-    BookFactory bookFactory;
+   
     bytes32 public info1;
     bytes32 public info2;
 
-    address ownerAddress;
-    string bookTitle;
-    string bookAuthor;
-    uint bookPrice;
+    address public ownerAddress;
+    string public bookTitle;
+    string public bookAuthor;
+    uint public bookPrice;
+    string public price;
 
-    function publish_book(string memory _bookTitle, string memory _bookAuthor, uint _bookPrice)  public {
-        string memory title = book.bookTitle();
-        string memory author = book.bookAuthor();
-        bookFactory.newBook(title, author, price);
+    function publishbook(uint256 memory reqID) public view {
+        BookFactory bookFactory;
+        receiveBookFromOracle(reqID, 'book','title');
+        receiveBookFromOracle(reqID,'book','author');
+        receiveBookFromOracle(reqID,'book','price');
+        bookPrice =str2int(price);
+        bookFactory.newBook(bookTitle, bookAuthor, bookPrice);
     }
 
-    function get_info() public{
-        bookTitle = getBook(ownerAddress,'title');
-    } 
+    function str2int(string memory numString) public pure returns(uint) {
+        uint  val=0;
+        bytes   memory stringBytes = bytes(numString);
+        for (uint  i =  0; i<stringBytes.length; i++) {
+            uint exp = stringBytes.length - i;
+            bytes1 ival = stringBytes[i];
+            uint8 uval = uint8(ival);
+           uint jval = uval - uint(0x30);
+   
+           val +=  (uint(jval) * (10**(exp-1))); 
+        }
+      return val;
+    }
 
-
-    constructor(address oracleAd) BookOracleClient(oracleAd) {}
+    constructor(address oracleAd, address bookfactoryAd) BookOracleClient(oracleAd) {}
 
     function getInfo(string calldata bookreq1, string calldata bookreq2)
         public
@@ -50,7 +64,7 @@ contract UserApp is BookOracleClient {
         }
         else if (info1 == 'price')
         {
-            bookPrice = info2;
+            price = info2;
         }
     }
 }
