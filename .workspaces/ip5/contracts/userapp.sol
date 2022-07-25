@@ -8,8 +8,8 @@ import "./oracle.sol";
 
 contract UserApp is BookOracleClient {
    
-    bytes32 public info1;
-    bytes32 public info2;
+    string public info1;
+    string public info2;
 
     address public ownerAddress;
     string public bookTitle;
@@ -17,11 +17,11 @@ contract UserApp is BookOracleClient {
     uint public bookPrice;
     string public price;
 
-    function publishbook(uint256 memory reqID) public view {
+    function publishbook(uint256  _reqID) public{
         BookFactory bookFactory;
-        receiveBookFromOracle(reqID, 'book','title');
-        receiveBookFromOracle(reqID,'book','author');
-        receiveBookFromOracle(reqID,'book','price');
+        receiveBookFromOracle(_reqID, 'book','title');
+        receiveBookFromOracle(_reqID,'book','author');
+        receiveBookFromOracle(_reqID,'book','price');
         bookPrice =str2int(price);
         bookFactory.newBook(bookTitle, bookAuthor, bookPrice);
     }
@@ -40,6 +40,18 @@ contract UserApp is BookOracleClient {
       return val;
     }
 
+    function bytes32ToString(bytes32 _bytes32) public pure returns (string memory) {
+        uint8 i = 0;
+        while(i < 32 && _bytes32[i] != 0) {
+            i++;
+        }
+        bytes memory bytesArray = new bytes(i);
+        for (i = 0; i < 32 && _bytes32[i] != 0; i++) {
+            bytesArray[i] = _bytes32[i];
+        }
+        return string(bytesArray);
+    }
+
     constructor(address oracleAd, address bookfactoryAd) BookOracleClient(oracleAd) {}
 
     function getInfo(string calldata bookreq1, string calldata bookreq2)
@@ -53,16 +65,16 @@ contract UserApp is BookOracleClient {
         bytes32 _info1,
         bytes32 _info2
     ) internal override {
-        info1 = _info1;
-        info2 = _info2;
-        if (info1 == 'title'){
+        info1 = bytes32ToString(_info1);
+        info2 = bytes32ToString(_info2);
+        if (keccak256(bytes(info1)) == keccak256(bytes('title'))){
             bookTitle = info2;
         }
-        else if (info1 == 'author')
+        else if (keccak256(bytes(info1)) == keccak256(bytes('author')))
         {
             bookAuthor = info2;
         }
-        else if (info1 == 'price')
+        else if (keccak256(bytes(info1)) == keccak256(bytes('price')))
         {
             price = info2;
         }
