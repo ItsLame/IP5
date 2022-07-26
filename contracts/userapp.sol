@@ -16,9 +16,10 @@ contract UserApp is BookOracleClient {
     string public bookAuthor;
     uint public bookPrice;
     string public price;
+     BookFactory bookFactory;
 
     function publishbook(uint256  _reqID) public{
-        BookFactory bookFactory;
+       
         receiveBookFromOracle(_reqID, 'book','title');
         receiveBookFromOracle(_reqID,'book','author');
         receiveBookFromOracle(_reqID,'book','price');
@@ -26,6 +27,10 @@ contract UserApp is BookOracleClient {
         bookFactory.newBook(bookTitle, bookAuthor, bookPrice);
     }
 
+    function get_books() public{
+       return bookFactory.get_books();
+
+    }
     function str2int(string memory numString) public pure returns(uint) {
         uint  val=0;
         bytes   memory stringBytes = bytes(numString);

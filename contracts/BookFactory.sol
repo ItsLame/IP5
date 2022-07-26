@@ -19,6 +19,9 @@ contract BookFactory
         // push book contract pointer to array
         books.push(book);
     }
+    function get_books()public{
+        return books;
+    }
 
     // new book with ether
     function newBookEther(string memory _bookTitle, string memory _bookAuthor, uint _bookPrice) public payable
