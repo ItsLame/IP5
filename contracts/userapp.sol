@@ -3,7 +3,7 @@
 pragma solidity >=0.7.0 <0.9.0;
 
 import "./BookFactory.sol";
-import "./oracle.sol";
+import "./Oracle.sol";
 
 
 contract UserApp is BookOracleClient {
