@@ -12,6 +12,10 @@ contract Book
     uint public bookPrice;
     bool public forSale;
 
+    function setForSale(bool status) public{
+        forSale = status;
+    }
+
     constructor(uint _bookID, string memory _bookTitle, string memory _bookAuthor, address payable _ownerPayable, address _ownerAddress, uint _bookPrice) public payable
     {
         bookID = _bookID;
