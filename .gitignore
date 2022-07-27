@@ -4,3 +4,4 @@ tsconfig.json
 build
 package.json
 package-lock.json
+eth_accounts

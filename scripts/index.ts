@@ -68,14 +68,23 @@ if (shellArgs.length < 1) {
             let contract!: Contract;
             try {
                 let account = getAccount(web3, "trusted_server");
-                let loadedoracle = loadCompiledSols(["oracle"]);
-                let contractdeploy = await deployContract(web3!, account, loadedoracle.contracts["oracle"]["BookOracle"].abi, loadedoracle.contracts["oracle"]["BookOracle"].evm.bytecode.object, [account.address]);
-                console.log("oracle contract address: " + contractdeploy.options.address);
-                let oracleAddr = contractdeploy.options.address;
-                let loaded = loadCompiledSols(["oracle"]);
-                let contractAddr = oracleAddr;
-            
-                contract = new web3.eth.Contract(loaded.contracts["oracle"]["BookOracle"].abi, contractAddr, {});
+                let loadedBookFactory = loadCompiledSols(["BookFactory"]);
+                let bookfactory = await deployContract(web3!, account, loadedBookFactory.contracts["BookFactory"]["BookFactory"].abi, loadedBookFactory.contracts["BookFactory"]["BookFactory"].evm.bytecode.object, [account.address]);
+                console.log("BookFactory contract address: " + bookfactory.options.address);
+                let BookFactoryAddr = bookfactory.options.address;
+                
+                let loadedTransfer = loadCompiledSols(["BookFactory","Transfer"]);
+                let transfer = await deployContract(web3!, account, loadedTransfer.contracts["Transfer"]["Transfer"].abi, loadedTransfer.contracts["Transfer"]["Transfer"].evm.bytecode.object, [BookFactoryAddr]);
+                console.log("transfer contract address: " + transfer.options.address);
+                let BookTransferAddr = transfer.options.address;
+
+                let loaded = loadCompiledSols(["BookFactory","Transfer", "userapp"]);
+                let contractapp = await deployContract(web3!, account, loaded.contracts["userapp"]["UserApp"].abi, loaded.contracts["userapp"]["UserApp"].evm.bytecode.object, [BookFactoryAddr,BookTransferAddr]);
+                console.log("user app contract address: " + contractapp.options.address);
+                let Appaddr = contractapp.options.address
+
+                contract = new web3.eth.Contract(loaded.contracts["userapp"]["UserApp"].abi,Appaddr , {});
+
             } catch (err) {
                 console.error("error listening oracle contract");
                 console.error(err);

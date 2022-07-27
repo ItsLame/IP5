@@ -1,9 +1,8 @@
 {
     "trusted_server": {
-
-        "pri_key":"7c4bb2b577324ec9ac5a1f0762be13df5aaa64859eb84f2d57530c8c2bbe411e" 
+        "pri_key": "20bb1bdc651203fe9f0f34ab7aa1cc6a958a5e9e18301349d2078ad249f3d7bb"
     },
     "user": {
-        "pri_key":"7c4bb2b577324ec9ac5a1f0762be13df5aaa64859eb84f2d57530c8c2bbe411e" 
+        "pri_key": "20bb1bdc651203fe9f0f34ab7aa1cc6a958a5e9e18301349d2078ad249f3d7bb"
     }
 }
