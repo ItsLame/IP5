@@ -4,6 +4,7 @@ pragma solidity >=0.7.0 <0.9.0;
 
 import "./BookFactory.sol";
 import "./Oracle.sol";
+// import "./Transfer";
 
 
 contract UserApp is BookOracleClient {
@@ -27,10 +28,7 @@ contract UserApp is BookOracleClient {
         bookFactory.newBook(bookTitle, bookAuthor, bookPrice);
     }
 
-    function get_books() public{
-       return bookFactory.get_books();
 
-    }
     function str2int(string memory numString) public pure returns(uint) {
         uint  val=0;
         bytes   memory stringBytes = bytes(numString);
