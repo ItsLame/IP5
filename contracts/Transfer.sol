@@ -11,24 +11,34 @@ contract Transfer
 {
     BookFactory bookFactory;
 
-    function buy(address _bookAddress,address sender) payable public {
+    function buy(address _bookAddress) payable public {
         Book book = Book(_bookAddress);
         uint price = book.bookPrice();
         string memory title = book.bookTitle();
         string memory author = book.bookAuthor();
         bool forSale = book.forSale();
+
         // check if the book is for sale
         require(forSale == true, "Book is not for sale");
+        require(msg.value > price ,"give the right price");
+
         // create a new copy of the book for buyer
+        bookFactory.newBook(title, author, price, msg.sender);
         
-        bookFactory.newBook(title, author, price,sender);
+        // transfer ownership
+        book.setNewOwner(msg.sender);
+
+        // put book off the market 
+        offmarket(_bookAddress);
     }
 
     function sell(address _bookAddress) public  {
         Book book = Book(_bookAddress);
         address owner = book.ownerAddress();
+
         // owner only action
         require(msg.sender == owner, "Only owner can mark book as for sale");
+
         // turn on book for sale
         book.setForSale(true);
     }
@@ -36,8 +46,10 @@ contract Transfer
     function offmarket(address _bookAddress) public  {
         Book book = Book(_bookAddress);
         address owner = book.ownerAddress();
+
         // owner only action
-        require(msg.sender == owner, "Only owner can mark book as for sale");
+        require(msg.sender == owner, "Only owner can mark book as off market");
+
         // turn off book for sale
         book.setForSale(false);
     }
@@ -46,4 +58,5 @@ contract Transfer
     { 
         bookFactory = BookFactory(bookfactoryAd); 
     }
+
 }
