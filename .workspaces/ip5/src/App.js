@@ -9,62 +9,34 @@ export default function App() {
   const [contractListened, setContractListened] = useState();
   const [error, setError] = useState();
   const [contractInfo, setContractInfo] = useState({
-    address: "-",
-    tokenName: "-",
-    tokenSymbol: "-",
-    totalSupply: "-",
+    bookTitle: "-",
+    bookAuthor: "-",
+    bookOwner: "-",
+    bookPrice: "-",
+    forSale: "-",
   });
   const [balanceInfo, setBalanceInfo] = useState({
     address: "-",
     balance: "-",
   });
 
-  useEffect(() => {
-    if (contractInfo.address !== "-") {
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const erc20 = new ethers.Contract(
-        contractInfo.address,
-        erc20abi,
-        provider
-      );
-
-      erc20.on("Transfer", (from, to, amount, event) => {
-        console.log({ from, to, amount, event });
-
-        setTxs((currentTxs) => [
-          ...currentTxs,
-          {
-            txHash: event.transactionHash,
-            from,
-            to,
-            amount: String(amount),
-          },
-        ]);
-      });
-      setContractListened(erc20);
-
-      return () => {
-        contractListened.removeAllListeners();
-      };
-    }
-  }, [contractInfo.address]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
     const provider = new ethers.providers.Web3Provider(window.ethereum);
+    await provider.send("eth_requestAccounts", []);
+    const signer = await provider.getSigner();
+    console.log(provider);
+    const erc20 = new ethers.Contract(
+      "0x552cd47A844Acd1B72D5EA02753567B3609eFA94",
+      erc20abi,
+      provider
+    );
 
-    const erc20 = new ethers.Contract(data.get("addr"), erc20abi, provider);
-
-    const tokenName = await erc20.name();
-    const tokenSymbol = await erc20.symbol();
-    const totalSupply = await erc20.totalSupply();
+    const tokenName = await erc20.getBook(0);
 
     setContractInfo({
-      address: data.get("addr"),
       tokenName,
-      tokenSymbol,
-      totalSupply,
     });
   };
 
@@ -117,31 +89,34 @@ export default function App() {
                 type="submit"
                 className="btn btn-primary submit-button focus:ring focus:outline-none w-full"
               >
-                Get token info
+                Get Book Info
               </button>
             </footer>
-            <div className="px-4">
+            <div className="px-5">
               <div className="overflow-x-auto">
                 <table className="table w-full">
                   <thead>
                     <tr>
-                      <th>Name</th>
-                      <th>Symbol</th>
-                      <th>Total supply</th>
+                      <th>Book Title</th>
+                      <th>Book Author</th>
+                      <th>Owner</th>
+                      <th>Book Price</th>
+                      <th>For Sale?</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <th>{contractInfo.tokenName}</th>
-                      <td>{contractInfo.tokenSymbol}</td>
-                      <td>{String(contractInfo.totalSupply)}</td>
-                      <td>{contractInfo.deployedAt}</td>
+                      <th>{contractInfo.bookTitle}</th>
+                      <td>{contractInfo.bookAuthor}</td>
+                      <td>{contractInfo.bookOwner}</td>
+                      <td>{contractInfo.bookPrice}</td>
+                      <td>{contractInfo.forSale}</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
             </div>
-            <div className="p-4">
+            <div className="p-5">
               <button
                 onClick={getMyBalance}
                 type="submit"

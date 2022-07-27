@@ -5,22 +5,25 @@ pragma solidity >=0.7.0 <0.9.0;
 // import Book, BookFactory, and BookReadOnly contract
 import "./Book.sol";
 import "./BookFactory.sol";
+
 // import "./BookReadOnly.sol";
 
-contract Transfer
-{
+contract Transfer {
     // BookFactory bookFactory;
     // BookReadOnly bookReadOnly;
     // Book book;
 
     // constructor(address _bookfactoryAddress)
-    // { 
-    //     bookFactory = BookFactory(_bookfactoryAddress); 
+    // {
+    //     bookFactory = BookFactory(_bookfactoryAddress);
     // }
 
     // buy book and ownership to read (not allowed for resale)
-    function buy(BookFactory _bookFactory, Book _book, address _senderAddress) payable public
-    {
+    function buy(
+        BookFactory _bookFactory,
+        Book _book,
+        address _senderAddress
+    ) public payable {
         // Book book = Book(_bookAddress);
         // uint price = _book.bookPrice();
         // string memory title = _book.bookTitle();
@@ -35,22 +38,26 @@ contract Transfer
         // bookFactory.newBook(title, author, price, msg.sender);
 
         // create a new book contract for buyer (for proof; non-resale)
-        _bookFactory.newBookReadOnly(_book.bookTitle(), _book.bookAuthor(), _book.bookPrice(), _senderAddress);
-        
+        _bookFactory.newBookReadOnly(
+            _book.bookTitle(),
+            _book.bookAuthor(),
+            _book.bookPrice(),
+            _senderAddress
+        );
+
         // transfer buyer -> owner (money)
         // money send into owner account
-        _book.ownerPayable().transfer(msg.value); 
+        _book.ownerPayable().transfer(msg.value);
 
         // transfer ownership
         // book.setNewOwner(msg.sender);
 
-        // put book off the market 
+        // put book off the market
         // offmarket(_book);
     }
 
     // put book up for selling
-    function sell(Book _book) public
-    {
+    function sell(Book _book) public {
         // Book book = Book(_bookAddress);
         // address owner = _book.ownerAddress();
 
@@ -62,8 +69,7 @@ contract Transfer
     }
 
     // put book off market
-    function offmarket(Book _book) public
-    {
+    function offmarket(Book _book) public {
         // Book book = Book(_bookAddress);
         // address owner = _book.ownerAddress();
 
