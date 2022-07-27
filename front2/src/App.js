@@ -49,7 +49,6 @@ class App extends Component {
         });
       }
     }
-    console.log(this.state.books);
     const numBooksReadOnly = await bookFactory.methods
       .numBooksReadOnly()
       .call();
@@ -59,7 +58,6 @@ class App extends Component {
       const docRef = doc(db, "BooksReadOnly", String(i));
       const docSnap = await getDoc(docRef);
       const found = docSnap.data();
-      console.log(found);
       if (docSnap.exists() && found.ownerAddress == this.state.account) {
         this.setState({
           booksReadOnly: [
