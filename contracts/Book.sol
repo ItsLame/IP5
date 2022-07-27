@@ -16,6 +16,11 @@ contract Book
         forSale = status;
     }
 
+    function setNewOwner(address _ownerAddress) public
+    {
+        ownerAddress = _ownerAddress;
+    }
+
     constructor(uint _bookID, string memory _bookTitle, string memory _bookAuthor, address payable _ownerPayable, address _ownerAddress, uint _bookPrice) public payable
     {
         bookID = _bookID;

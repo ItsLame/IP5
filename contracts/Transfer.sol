@@ -20,7 +20,7 @@ contract Transfer
 
         // check if the book is for sale
         require(forSale == true, "Book is not for sale");
-        require(msg.value > price ,"give the right price");
+        require(msg.value >= price ,"give the right price");
 
         // create a new copy of the book for buyer
         bookFactory.newBook(title, author, price, msg.sender);
