@@ -34,6 +34,13 @@ contract BookFactory {
         books.push(book);
     }
 
+    function numBooks()  public view returns (uint256){
+        return books.length;
+    }
+
+    function numBooksReadOnly() public view returns (uint256){
+        return booksReadOnly.length;
+    }
     // to initialize new book (read only) contract
     function newBookReadOnly(
         string memory _bookTitle,
