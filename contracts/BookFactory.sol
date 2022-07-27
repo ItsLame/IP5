@@ -27,7 +27,7 @@ contract BookFactory {
             _bookAuthor,
             payable(_sender),
             _sender,
-            (_bookPrice * (1 ether))
+            (_bookPrice * (1e12 wei))
         );
 
         // push book contract pointer to array
@@ -55,7 +55,7 @@ contract BookFactory {
             _bookAuthor,
             payable(_sender),
             _sender,
-            (_bookPrice * (1 ether))
+            (_bookPrice * (1e12 wei))
         );
 
         // push book (read only) contract pointer to array

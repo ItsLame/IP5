@@ -40,8 +40,8 @@ contract UserApp {
         // checks
         require(book.forSale() == true, "Book is not for sale!");
         require(
-            msg.value == book.bookPrice(),
-            "Need to send exact amount of Ether!"
+            msg.value >= book.bookPrice(),
+            "Need to send exact amount of szabo!"
         );
 
         // money send into owner account

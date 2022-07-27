@@ -25,6 +25,7 @@ class App extends Component {
 
     this.setState({ bookFactory });
     const numBooks = await bookFactory.methods.numBooks().call();
+    console.log(numBooks)
     this.setState({ numBooks });
     for (var i = 0; i < numBooks; i++) {
       const book = await bookFactory.methods.books(i).call();
@@ -165,14 +166,14 @@ class App extends Component {
                       id="price"
                       type="text"
                       className="form-control"
-                      placeholder="Book Price..."
+                      placeholder="Book Price in szabo 1e12 wei.."
                       required
                     />
                     <input
                       id="content"
                       type="text"
                       className="form-control"
-                      placeholder="Book Content..."
+                      placeholder="Book Content In Hash or plain text..."
                       required
                     />
                     <input type="submit" hidden="" />
@@ -211,7 +212,7 @@ class App extends Component {
                       id="title"
                       type="text"
                       className="form-control"
-                      placeholder="Book Id..."
+                      placeholder="Book Id in DB..."
                       required
                     />
                     <input type="submit" hidden="" />
@@ -250,7 +251,7 @@ class App extends Component {
                       id="title"
                       type="text"
                       className="form-control"
-                      placeholder="Book Id..."
+                      placeholder="Book Id in DB..."
                       required
                     />
                     <input type="submit" hidden="" />
@@ -310,7 +311,7 @@ class App extends Component {
                       id="title"
                       type="text"
                       className="form-control"
-                      placeholder="Book Id..."
+                      placeholder="Book Id in DB..."
                       required
                     />
                     <input type="submit" hidden="" />
