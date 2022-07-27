@@ -2,7 +2,7 @@
 
 pragma solidity >=0.7.0 <0.9.0;
 
-contract Book
+contract BookReadOnly
 {
     string public bookTitle;
     string public bookAuthor;
@@ -11,6 +11,11 @@ contract Book
     address public ownerAddress;
     uint public bookPrice;
     bool public forSale;
+
+    function setNewOwner(address _ownerAddress) public
+    {
+        ownerAddress = _ownerAddress;
+    }
 
     constructor(uint _bookID, string memory _bookTitle, string memory _bookAuthor,
                 address payable _ownerPayable, address _ownerAddress, uint _bookPrice) public payable
@@ -23,15 +28,4 @@ contract Book
         bookPrice = _bookPrice;
         forSale = false;
     }
-
-    function setForSale(bool _status) public
-    {
-        forSale = _status;
-    }
-
-    // function setNewOwner(address _ownerAddress) public
-    // {
-    //     ownerAddress = _ownerAddress;
-    // }
-
 }

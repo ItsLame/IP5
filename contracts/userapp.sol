@@ -6,55 +6,91 @@ import "./BookFactory.sol";
 // import "./Oracle.sol";
 import "./Transfer.sol";
 
-contract UserApp {
-    string public info1;
-    string public info2;
+contract UserApp
+{
+    // string public info1;
+    // string public info2;
 
-    address public ownerAddress;
-    string public bookTitle;
-    string public bookAuthor;
-    uint256 public bookPrice;
-    string public price;
+    // address public ownerAddress;
+    // string public bookTitle;
+    // string public bookAuthor;
+    // uint256 public bookPrice;
+    // string public price;
+
     BookFactory public bookFactory;
     Transfer public transferC;
 
-    function publishbook(
-        string memory bookTitle,
-        string memory bookAuthor,
-        uint256 bookPrice
-    ) public {
-        bookFactory.newBook(bookTitle, bookAuthor, bookPrice, msg.sender);
+    constructor(address _bookfactoryAddress, address _transferContractAddress)
+    { 
+        bookFactory = BookFactory(_bookfactoryAddress); 
+        transferC = Transfer(_transferContractAddress);
     }
 
-    function str2int(string memory numString) public pure returns (uint256) {
-        uint256 val = 0;
+    // publish new book
+    function publishBook(string memory _bookTitle, string memory _bookAuthor, uint256 _bookPrice ) public
+    {
+        bookFactory.newBook(_bookTitle, _bookAuthor, _bookPrice, msg.sender);
+    }
+
+    // buy book
+    function buyBook(address _bookAddress) payable public
+    {
+        Book book = Book(_bookAddress);
+
+        // checks
+        require(book.forSale() == true, "Book is not for sale!");
+        require(msg.value == book.bookPrice(), "Need to send exact amount of Ether!");
+
+        // money send into owner account
+        // address payable owner = book.ownerPayable();
+        // owner.transfer(msg.value);
+
+        // buy the book
+        transferC.buy(bookFactory, book, msg.sender);
+    }
+
+    // sell book
+    function sellBook(address _bookAddress) public
+    {
+        Book book = Book(_bookAddress);
+
+        // checks
+        require(msg.sender == book.ownerAddress(), "Only owner (publisher) put book up for sale!");
+
+        // put book up for sale
+        transferC.sell(book);
+    }
+
+    // remove book off the market
+    function offMarket(address _bookAddress) public
+    {
+        Book book = Book(_bookAddress);
+
+        // checks
+        require(msg.sender == book.ownerAddress(), "Only owner (publisher) can mark book as off market!");
+
+        // put book off the market
+        transferC.offmarket(book);
+    }
+
+
+
+
+
+    // not sure? string to int; comment please
+    function str2int(string memory numString) public pure returns(uint)
+    {
+        uint val=0;
         bytes memory stringBytes = bytes(numString);
-        for (uint256 i = 0; i < stringBytes.length; i++) {
-            uint256 exp = stringBytes.length - i;
+        for (uint  i =  0; i<stringBytes.length; i++)
+        {
+            uint exp = stringBytes.length - i;
             bytes1 ival = stringBytes[i];
             uint8 uval = uint8(ival);
-            uint256 jval = uval - uint256(0x30);
-
-            val += (uint256(jval) * (10**(exp - 1)));
+            uint jval = uval - uint(0x30);
+   
+            val += (uint(jval) * (10**(exp-1))); 
         }
         return val;
-    }
-
-    function buyBook(address bookAddress) public payable {
-        Book book = Book(bookAddress);
-        require(
-            msg.value >= book.bookPrice(),
-            "Need to send exact amount of Wei"
-        );
-        // transfer buyer -> owner (money)
-        // money send into owner account
-        address payable owner = book.ownerPayable();
-        owner.transfer(msg.value);
-        transferC.buy(bookAddress, msg.sender);
-    }
-
-    constructor(address bookfactoryAd, address transferContract) {
-        bookFactory = BookFactory(bookfactoryAd);
-        transferC = Transfer(transferContract);
     }
 }
