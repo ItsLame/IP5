@@ -2,7 +2,7 @@
 
 pragma solidity >=0.7.0 <0.9.0;
 
-// import Book and BookReadOnly contract
+// imports
 import "./Book.sol";
 import "./BookReadOnly.sol";
 
@@ -62,31 +62,8 @@ contract BookFactory {
         booksReadOnly.push(bookReadOnly);
     }
 
-    // ---------------- //
-    // ---- IGNORE ---- //
-    // ---------------- //
-
+    // get book
     function getBook(uint256 number) public view returns (address) {
         return address(books[number]);
-    }
-
-    // new book with ether
-    function newBookEther(
-        string memory _bookTitle,
-        string memory _bookAuthor,
-        uint256 _bookPrice
-    ) public payable {
-        // pointer to book contract
-        Book book = (new Book){value: msg.value}(
-            books.length,
-            _bookTitle,
-            _bookAuthor,
-            payable(msg.sender),
-            msg.sender,
-            _bookPrice
-        );
-
-        // push book contract pointer to array
-        books.push(book);
     }
 }

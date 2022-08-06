@@ -28,10 +28,4 @@ contract Book
     {
         forSale = _status;
     }
-
-    // function setNewOwner(address _ownerAddress) public
-    // {
-    //     ownerAddress = _ownerAddress;
-    // }
-
 }
