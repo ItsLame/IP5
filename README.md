@@ -37,10 +37,30 @@ First of all a few things are required.
 ### Setting Up
 
 1. Granted the above requirements are fulfilled, simply launch the ganache test chain and make sure to use one of the given accounts on the chain by default.
-2. Once this is done, compile and deploy a transfer and BookFactory contract to the chain. Keep note of both addresses.
-3. This then allows for the oracle to be deployed with the addresses of the transfer and bookFactory. Keep note of this address too.
-4. From here return to the ./front folder and then go to ./front/src/config.js
-5. Modify the corresponding environment variables for the BookFactory and userApp addresses.
+
+2. Copy the private key from ganache to `eth_accounts/accounts.json`
+
+3. Once this is done, run 
+
+   ```sh
+   npx tsc && node build/index.js deploy
+   ```
+
+   it will deploy the contracts
+
+   ![image-20220807105351905](/Users/changxing/project/T2/IP5/img/deloy.png)
+
+4. This allows for the oracle to be deployed with the addresses of the transfer and bookFactory. Keep note of this address too.
+
+5. From here return to the ./front folder and then go to ./front/src/config.js
+
+   <img src="/Users/changxing/project/T2/IP5/img/front_folder.png" alt="image-20220807105448082" style="zoom:50%;" />
+
+6. Modify the corresponding environment variables for the BookFactory and userApp addresses.
+
+   ![image-20220807105604742](/Users/changxing/project/T2/IP5/img/configjs.png)
+
+   
 
 ### Run
 

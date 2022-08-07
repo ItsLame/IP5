@@ -3,7 +3,6 @@ import { WebsocketProvider, Account } from 'web3-core';
 import { deployContract } from './deploy';
 import { handleRequestEvent } from './listen';
 import { loadCompiledSols } from './load';
-import { grabBook } from './book_grabber';
 import { methodSend } from './send';
 import { Contract } from 'web3-eth-contract';
 
@@ -52,15 +51,20 @@ if (shellArgs.length < 1) {
 
     if (cmd0 == "deploy") {
         let account = getAccount(web3, "trusted_server");
-        let loadedoracle = loadCompiledSols(["oracle"]);
-        console.log(account,shellArgs);
-        let contract = await deployContract(web3!, account, loadedoracle.contracts["oracle"]["BookOracle"].abi, loadedoracle.contracts["oracle"]["BookOracle"].evm.bytecode.object, [account.address]);
-        console.log("oracle contract address: " + contract.options.address);
-        console.log(shellArgs);
-        let oracleAddr = contract.options.address;
-        let loaded = loadCompiledSols(["oracle", "userapp"]);
-        let contractapp = await deployContract(web3!, account, loaded.contracts["userapp"]["UserApp"].abi, loaded.contracts["userapp"]["UserApp"].evm.bytecode.object, [oracleAddr]);
+        let loadedBookFactory = loadCompiledSols(["BookFactory"]);
+        let bookfactory = await deployContract(web3!, account, loadedBookFactory.contracts["BookFactory"]["BookFactory"].abi, loadedBookFactory.contracts["BookFactory"]["BookFactory"].evm.bytecode.object, [account.address]);
+        console.log("BookFactory contract address: " + bookfactory.options.address);
+        let BookFactoryAddr = bookfactory.options.address;
+        
+        let loadedTransfer = loadCompiledSols(["BookFactory","Transfer"]);
+        let transfer = await deployContract(web3!, account, loadedTransfer.contracts["Transfer"]["Transfer"].abi, loadedTransfer.contracts["Transfer"]["Transfer"].evm.bytecode.object, [BookFactoryAddr]);
+        console.log("transfer contract address: " + transfer.options.address);
+        let BookTransferAddr = transfer.options.address;
+
+        let loaded = loadCompiledSols(["BookFactory","Transfer", "userapp"]);
+        let contractapp = await deployContract(web3!, account, loaded.contracts["userapp"]["UserApp"].abi, loaded.contracts["userapp"]["UserApp"].evm.bytecode.object, [BookFactoryAddr,BookTransferAddr]);
         console.log("user app contract address: " + contractapp.options.address);
+        let Appaddr = contractapp.options.address
         web3Provider.disconnect(1000, 'Normal Closure');
     } 
     else if (cmd0 == "listen") {
