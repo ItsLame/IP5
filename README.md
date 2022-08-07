@@ -48,17 +48,17 @@ First of all a few things are required.
 
    it will deploy the contracts
 
-   ![image-20220807105351905](/Users/changxing/project/T2/IP5/img/deloy.png)
+   ![image-20220807105351905](https://github.com/ItsLame/IP5/blob/main/img/deloy.png)
 
 4. This allows for the oracle to be deployed with the addresses of the transfer and bookFactory. Keep note of this address too.
 
 5. From here return to the ./front folder and then go to ./front/src/config.js
 
-   <img src="/Users/changxing/project/T2/IP5/img/front_folder.png" alt="image-20220807105448082" style="zoom:50%;" />
+   <img src="https://github.com/ItsLame/IP5/blob/main/img/front_folder.png" alt="image-frontfolder" style="zoom:50%;" />
 
 6. Modify the corresponding environment variables for the BookFactory and userApp addresses.
 
-   ![image-20220807105604742](/Users/changxing/project/T2/IP5/img/configjs.png)
+   ![image-configjs](https://github.com/ItsLame/IP5/blob/main/img/configjs.png)
 
    
 
