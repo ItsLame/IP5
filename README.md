@@ -11,11 +11,15 @@ demonstrates the typical usage of the contracts without the need for a fully fle
 
 Below are relevant instructions to use the application.
 
-## NOTE: Because this application uses a cloud database, errors may occur if attempting to use several different instances of the same Oracle contract.
+### NOTE: Because this application uses a cloud database, errors may occur if attempting to use several different instances of the same Oracle contract.
 
-## This is because the data on the database does not automatically clear when a new contract is created.
+#### This is because the data on the database does not automatically clear when a new contract is created.
 
-## If there needs to be more than one contract made, please contact someone from the team so the database can be cleared.
+### If there needs to be more than one contract made, please contact someone from the team so the database can be cleared.
+
+----
+
+
 
 ### Requirements / Installations
 
